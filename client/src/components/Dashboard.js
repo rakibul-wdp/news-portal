@@ -15,9 +15,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const handleFetch = async () => {
-      await axios.get("http://localhost:5000/api/getalluser", {
-        username: username,
-      }).then(res => {
+      await axios.get("http://localhost:5000/api/getalluser").then(res => {
         setAlldata(res.data);
         setDisplaydata(
           res.data.data?.slice(0, 8).sort((a, b) => {
