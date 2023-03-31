@@ -3,7 +3,7 @@ import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
