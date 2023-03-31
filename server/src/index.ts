@@ -13,6 +13,10 @@ const io = new Server(server);
 app.use(cors());
 const port = 5000;
 
+// Register routes as middleware
+// app.use('/api/game', gameRoutes);
+// app.use('/api/leaderboard', leaderboardRoutes);
+
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
