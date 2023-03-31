@@ -8,9 +8,14 @@ import http from 'http';
 const server = http.createServer(app);
 import { Server } from "socket.io";
 import LeaderboardModel from "./models/leaderboard.js";
+import gameRoutes from "./routes/game.js";
+import leaderboardRoutes from "./routes/leaderboard.js";
 const io = new Server(server);
 app.use(cors());
 const port = 5000;
+// Register routes as middleware
+app.use('/game', gameRoutes);
+app.use('/leaderboard', leaderboardRoutes);
 server.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
