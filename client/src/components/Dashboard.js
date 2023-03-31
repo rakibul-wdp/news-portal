@@ -8,16 +8,16 @@ const Dashboard = () => {
   let location = useLocation();
   const user = location.state;
   console.log(user);
-  const [alldata, setAlldata] = useState([]);
-  const [displaydata, setDisplaydata] = useState();
+  const [allData, setAllData] = useState([]);
+  const [displayData, setDisplayData] = useState();
   const navigate = useNavigate();
 
 
   useEffect(() => {
     const handleFetch = async () => {
       await axios.get("http://localhost:5000/api/getalluser").then(res => {
-        setAlldata(res.data);
-        setDisplaydata(
+        setAllData(res.data);
+        setDisplayData(
           res.data.data?.slice(0, 8).sort((a, b) => {
             return b.score - a.score;
           })
@@ -85,8 +85,8 @@ const Dashboard = () => {
           <div className="leaderboard-title">Leaderboard</div>
 
           <div className="leaderboard-status-box">
-            {displaydata &&
-              displaydata?.map((val, ind) => {
+            {displayData &&
+              displayData?.map((val, ind) => {
                 return (
                   <div className="leaderboard-status" key={ind}>
                     <div className="leaderboard-status-name">

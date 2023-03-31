@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Gamecards = () => {
+const GameCards = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const user = location.state.user;
@@ -15,68 +15,65 @@ const Gamecards = () => {
     "Shuffle card🔀",
     "Exploding Kitten card💣",
   ]);
-  const [carddata, cardSetdata] = useState(data);
-  const [cardtext, cardSettext] = useState("");
-  const [cardcount, setCardcount] = useState(5);
-  const [defusecardcount, setDefusecardcount] = useState(0);
+  const [cardData, setCardData] = useState(data);
+  const [cardText, setCardText] = useState("");
+  const [cardCount, setCardCount] = useState(5);
+  const [defuseCardCount, setDefuseCardCount] = useState(0);
   const [win, setWin] = useState(false);
-  const [lose, setlose] = useState(false);
+  const [lose, setLose] = useState(false);
   const [restart, setRestart] = useState(false);
-  const [score, setscore] = useState(user.score);
+  const [score, setScore] = useState(user.score);
 
   const handleCards = () => {
-    const arrlength = carddata.length;
-    const index = Math.floor(Math.random() * arrlength);
-    const text = carddata[index];
-    const count = defusecardcount;
+    const arrLength = cardData.length;
+    const index = Math.floor(Math.random() * arrLength);
+    const text = cardData[index];
+    const count = defuseCardCount;
     setFlag(true);
-    cardSettext(text);
+    setCardText(text);
 
-    if (cardcount === 1) {
-      setCardcount(5);
+    if (cardCount === 1) {
+      setCardCount(5);
       setWin(true);
       setFlag(false);
-      setscore(score + 1);
+      setScore(score + 1);
     } else if (text.includes("Cat card😼")) {
-      setCardcount(cardcount - 1);
+      setCardCount(cardCount - 1);
       setWin(false);
       setRestart(false);
-      setlose(false);
+      setLose(false);
 
     } else if (text.includes("Defuse card🙅‍♂️")) {
-      setDefusecardcount(defusecardcount + 1);
-      setCardcount(cardcount - 1);
+      setDefuseCardCount(defuseCardCount + 1);
+      setCardCount(cardCount - 1);
       setWin(false);
       setRestart(false);
-      setlose(false);
+      setLose(false);
     } else if (text.includes("Shuffle card🔀")) {
-      setCardcount(5);
-      setDefusecardcount(0);
+      setCardCount(5);
+      setDefuseCardCount(0);
       setRestart(true);
       setWin(false);
       // setRestart(false)
-      setlose(false);
-      cardSetdata(data);
+      setLose(false);
+      setCardData(data);
       // setFlag(false);
     } else if (text.includes("Exploding Kitten card💣")) {
       if (count === 0) {
-        setCardcount(5);
-        setlose(true);
+        setCardCount(5);
+        setLose(true);
         // setFlag(false);
-        setDefusecardcount(0);
+        setDefuseCardCount(0);
         setWin(false);
         setRestart(false);
       } else {
-        setDefusecardcount(defusecardcount - 1);
+        setDefuseCardCount(defuseCardCount - 1);
       }
     }
   };
 
   const exitGame = async () => {
-    const maxscore = Math.max(score + user.score, score);
-    console.log("Maxscore", maxscore);
-    console.log("Maxscore", score);
-    console.log("Maxscore", user.score);
+    const maxScore = Math.max(score + user.score, score);
 
     await axios.post("http://localhost:5000/api/updatescore", {
       username: user.username,
@@ -123,7 +120,7 @@ const Gamecards = () => {
             Deck of Cards
           </div>
           {flag === true ? (
-            <div className="card-deck">{cardtext}</div>
+            <div className="card-deck">{cardText}</div>
           ) : (
             <div></div>
           )}
@@ -131,7 +128,7 @@ const Gamecards = () => {
 
         <div className="card-count-box">
           <h5>Total Cards: 5</h5>
-          <h5>Remaining Card: {cardcount}</h5>
+          <h5>Remaining Card: {cardCount}</h5>
         </div>
       </div>
 
@@ -142,4 +139,4 @@ const Gamecards = () => {
   );
 }
 
-export default Gamecards;
+export default GameCards;
