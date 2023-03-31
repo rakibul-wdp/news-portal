@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startGame, drawCard, endGame } from "./redux/actions/gameActions";
+import { drawCard, endGame, startGame } from './redux/actions/gameActions';
 
 function App() {
   const [username, setUsername] = useState("");
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div>
-      {game.isStarted ? (
+      {game?.isStarted ? (
         <>
           <h2>{`Player: ${game.username} Score: ${game.score}`}</h2>
           <div>
