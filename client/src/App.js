@@ -1,6 +1,24 @@
 import './App.css';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { startGame, drawCard, endGame } from "./redux/actions/gameActions";
 
 function App() {
+  const [username, setUsername] = useState("");
+  const dispatch = useDispatch();
+  const game = useSelector((state) => state.game);
+
+  const handleStartGame = () => {
+    dispatch(startGame(username));
+  };
+
+  const handleDrawCard = () => {
+    dispatch(drawCard(game));
+  };
+
+  const handleEndGame = () => {
+    dispatch(endGame(game));
+  };
 
   return (
     <div>
