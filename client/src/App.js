@@ -1,46 +1,20 @@
 import './App.css';
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { drawCard, endGame, startGame } from './redux/actions/gameActions';
+import React from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import Gamecards from './components/Gamecards';
 
 function App() {
-  const [username, setUsername] = useState("");
-  const dispatch = useDispatch();
-  const game = useSelector((state) => state);
-
-  const handleStartGame = () => {
-    dispatch(startGame(username));
-  };
-
-  const handleDrawCard = () => {
-    dispatch(drawCard(game));
-  };
-
-  const handleEndGame = () => {
-    dispatch(endGame(game));
-  };
 
   return (
-    <div>
-      {game?.isStarted ? (
-        <>
-          <h2>{`Player: ${game.username} Score: ${game.score}`}</h2>
-          <div>
-            {game.deck.map((card, index) => (
-              <div key={index}>{card}</div>
-            ))}
-          </div>
-          <button onClick={handleDrawCard}>Draw Card</button>
-          <button onClick={handleEndGame}>End Game</button>
-        </>
-      ) : (
-        <>
-          <h2>Enter your username to start the game:</h2>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-          <button onClick={handleStartGame}>Start Game</button>
-        </>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route default path="/" element={<Login />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="game" element={<Gamecards />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
