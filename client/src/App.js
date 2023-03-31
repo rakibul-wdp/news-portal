@@ -6,7 +6,7 @@ import { drawCard, endGame, startGame } from './redux/actions/gameActions';
 function App() {
   const [username, setUsername] = useState("");
   const dispatch = useDispatch();
-  const game = useSelector((state) => state.game);
+  const game = useSelector((state) => state);
 
   const handleStartGame = () => {
     dispatch(startGame(username));
