@@ -46,3 +46,21 @@ export const endGame = (game) => async (dispatch) => {
     },
   };
 };
+
+export const fetchLeaderboard = () => async (dispatch) => {
+  try {
+    // Fetch the initial leaderboard
+    const response = await axios.get("http://localhost:4000/leaderboard");
+    const leaderboard = response.data.leaderboard;
+    dispatch({ type: "FETCH_LEADERBOARD_SUCCESS", payload: { leaderboard } });
+
+    // Set up a socket connection to receive leaderboard updates
+    const socket = io("http://localhost:4000");
+    socket.on("leaderboard", (leaderboard) => {
+      dispatch({ type: "FETCH_LEADERBOARD_SUCCESS", payload: { leaderboard } });
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: "FETCH_LEADERBOARD_FAILURE" });
+  }
+};
