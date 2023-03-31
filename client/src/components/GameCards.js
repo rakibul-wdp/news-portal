@@ -15,6 +15,7 @@ const GameCards = () => {
     "Shuffle card🔀",
     "Exploding Kitten card💣",
   ]);
+
   const [cardData, setCardData] = useState(data);
   const [cardText, setCardText] = useState("");
   const [cardCount, setCardCount] = useState(5);
@@ -42,7 +43,6 @@ const GameCards = () => {
       setWin(false);
       setRestart(false);
       setLose(false);
-
     } else if (text.includes("Defuse card🙅‍♂️")) {
       setDefuseCardCount(defuseCardCount + 1);
       setCardCount(cardCount - 1);

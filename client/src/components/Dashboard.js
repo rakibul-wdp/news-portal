@@ -7,7 +7,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const Dashboard = () => {
   let location = useLocation();
   const user = location.state;
-  console.log(user);
   const [allData, setAllData] = useState([]);
   const [displayData, setDisplayData] = useState();
   const navigate = useNavigate();
