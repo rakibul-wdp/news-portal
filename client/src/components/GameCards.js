@@ -1,4 +1,3 @@
-import Header from "./Header";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";

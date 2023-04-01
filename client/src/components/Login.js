@@ -20,8 +20,8 @@ const Login = () => {
 
   return (
     <div className="bg-cover w-screen h-screen flex items-center justify-center" style={{ backgroundImage: `url(${Hero})` }}>
-      <div className="card w-96 h-96">
-        <div className="card-body rounded-2xl">
+      <div className="card w-96">
+        <div className="card-body rounded-2xl bg-white py-16">
           <form onSubmit={handleSubmit}>
             <input
               type="text"
