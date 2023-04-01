@@ -97,8 +97,8 @@ const GameCards = () => {
   return (
     <div className="bg-cover w-screen h-screen" style={{ backgroundImage: `url(${Table})` }}>
       <div className="flex flex-col md:flex-row items-center justify-center p-3">
-        <h1 className="bg-white btn btn-wide text-3xl text-black">Name: &nbsp;<span className="text-lime-500">{user.username}</span></h1>
-        <h1 className="bg-white btn btn-wide text-3xl text-black">Score: &nbsp;<span className="text-lime-500">{score}</span></h1>
+        <h1 className="bg-white btn btn-wide text-3xl text-black w-80">Name: &nbsp;<span className="text-lime-500">{user.username}</span></h1>
+        <h1 className="bg-white btn btn-wide text-3xl text-black w-80">Score: &nbsp;<span className="text-lime-500">{score}</span></h1>
       </div>
       <div className="relative">
         <div className="absolute -bottom-[40vh] left-[10vw]">
