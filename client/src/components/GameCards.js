@@ -126,7 +126,7 @@ const GameCards = () => {
           ) : (
             <div></div>
           )}
-          <div className="" onClick={handleCards}>
+          <div className="cursor-pointer" onClick={handleCards}>
             <div className="avatar">
               <div className="w-60 h-72 rounded">
                 <img src={CardBehind} alt="card behind" />
