@@ -80,7 +80,7 @@ const GameCards = () => {
   const exitGame = async () => {
     const maxScore = Math.max(score + user.score, score);
 
-    await axios.post("http://localhost:5000/api/updatescore", {
+    await axios.post("https://card-game-server.onrender.com", {
       username: user.username,
       score: score,
     }).then(res => {

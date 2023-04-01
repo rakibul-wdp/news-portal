@@ -9,7 +9,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios.post("http://localhost:5000/api/findorcreateuser", {
+    await axios.post("https://card-game-server.onrender.com", {
       username: username,
     }).then(res => {
       navigate("/dashboard", { state: { username: username, score: res.data[0].score } });
