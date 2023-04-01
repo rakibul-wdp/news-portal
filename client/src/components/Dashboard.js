@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const handleFetch = async () => {
-      await axios.get("https://card-game-server.onrender.com").then(res => {
+      await axios.get("https://card-game-server.onrender.com/getalluser").then(res => {
         setAllData(res.data);
         setDisplayData(
           res.data.data?.slice(0, 8).sort((a, b) => {
