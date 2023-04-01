@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import GameCards from './components/GameCards';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="game" element={<GameCards />} />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }
