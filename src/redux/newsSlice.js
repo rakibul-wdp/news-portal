@@ -1,29 +1,29 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const apiKey = 'aae9248c-537e-45b9-ac27-1bdd88e6b22d';
-const baseUrl = 'https://eventregistry.org/api/v1/article';
+const apiKey = process.env.REACT_APP_API_KEY;
+const baseUrl = process.env.REACT_APP_API_URL;
 
 export const fetchEventRegistryArticles = createAsyncThunk(
-  'news/fetchEventRegistryArticles',
+  "news/fetchEventRegistryArticles",
   async ({ query, page, category }) => {
     try {
       const response = await fetch(`${baseUrl}/getArticles`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: 'getArticles',
+          action: "getArticles",
           keyword: [category, query],
           articlesPage: page,
           articlesCount: 20,
-          articlesSortBy: 'date',
+          articlesSortBy: "date",
           articlesSortByAsc: false,
           articlesArticleBodyLen: -1,
-          resultType: 'articles',
-          dataType: ['news'],
+          resultType: "articles",
+          dataType: ["news"],
           apiKey: apiKey,
-          lang: ['eng'],
+          lang: ["eng"],
           forceMaxDataTimeWindow: 31,
         }),
       });
@@ -35,30 +35,32 @@ export const fetchEventRegistryArticles = createAsyncThunk(
       const data = await response.json();
       return { articles: data.articles.results, page };
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
       throw error;
     }
   }
 );
 
 const newsSlice = createSlice({
-  name: 'news',
+  name: "news",
   initialState: {
     articles: [],
     favorites: [],
     isFav: false,
-    status: 'idle',
+    status: "idle",
     error: null,
     currentPage: 1,
-    currentQuery: 'tesla',
-    currentCategory: 'all'
+    currentQuery: "tesla",
+    currentCategory: "all",
   },
   reducers: {
     addFavorite: (state, action) => {
       state.favorites.push(action.payload);
     },
     removeFavorite: (state, action) => {
-      state.favorites = state.favorites.filter(fav => fav.uri !== action.payload);
+      state.favorites = state.favorites.filter(
+        (fav) => fav.uri !== action.payload
+      );
     },
     toggleFavoriteView: (state) => {
       state.isFav = !state.isFav;
@@ -71,24 +73,31 @@ const newsSlice = createSlice({
     },
     setCategory: (state, action) => {
       state.currentCategory = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEventRegistryArticles.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchEventRegistryArticles.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.articles = action.payload.articles;
       })
       .addCase(fetchEventRegistryArticles.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.error.message;
       });
-  }
+  },
 });
 
-export const { addFavorite, removeFavorite, toggleFavoriteView, setPage, setQuery, setCategory } = newsSlice.actions;
+export const {
+  addFavorite,
+  removeFavorite,
+  toggleFavoriteView,
+  setPage,
+  setQuery,
+  setCategory,
+} = newsSlice.actions;
 
 export default newsSlice.reducer;
